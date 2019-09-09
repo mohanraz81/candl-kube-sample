@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: intializedb
+  namespace: mycart
+spec:
+  template:
+    spec:
+      containers:
+      - name: pi
+        image: mysql:5.7
+        command: 
+          - mysql -h mysql-0.mysql <<EOF
+            CREATE DATABASE mydatadb;
+            CREATE USER 'mysqluser'@'%' IDENTIFIED BY 'password';
+            GRANT ALL PRIVILEGES ON *.* TO 'mysqluser'@'%';
+            FLUSH PRIVILEGES;
+            EOF
+      restartPolicy: Never
+  backoffLimit: 4

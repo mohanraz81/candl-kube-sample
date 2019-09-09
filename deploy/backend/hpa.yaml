@@ -2,13 +2,13 @@
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: myapp-frontend-hpa
+  name: myapp-backend-hpa
   namespace: mycart
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: myacart-frontend
+    name: myacart-backend
   minReplicas: 2
   maxReplicas: 10
   metrics:
