@@ -1,0 +1,15 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{.Values.srvname.fe}}
+  namespace: {{.Values.namespace}}
+spec:
+  selector:
+    app: myapp
+    tier: frontend
+  ports:
+  - protocol: "TCP"
+    port: 80
+    targetPort: 80
+  type: LoadBalancer

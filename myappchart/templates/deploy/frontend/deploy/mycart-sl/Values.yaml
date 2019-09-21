@@ -1,0 +1,37 @@
+nsname: mycart
+appname:
+  msname: mycart
+  fename: frontend
+  bename: backend
+  dbname: database
+image:
+  dockerid: mohanraz81
+  tag_major: 1
+  tag_minor: 0
+  imagepullpolicy: Always
+mlabel:
+  frontend:
+    layer: frontend
+  backend:
+    layer: backend
+  database:
+    layer: database
+resources:
+  frontend: 
+    cpu:
+      limit: 200m
+      request: 200m
+    memory:
+      limit: 200Mi
+      request: 200Mi  
+  backend: 
+    cpu:
+      limit: 200m
+      request: 200m
+    memory:
+      limit: 200Mi
+      request: 200Mi 
+enviroinment:
+  frontend:
+    - name: BACKENDLB
+      value: backendapi

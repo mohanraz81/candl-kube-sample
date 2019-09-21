@@ -1,0 +1,15 @@
+namespace: mycart
+resname:
+  fe: frontend
+  be: backend
+  db: database
+  dbconfig: mysql
+srvname:
+  fe: api
+  be: backendapi
+  dbread: mysql-read
+  dbwrite: mysql
+resources:
+  frontend:
+    limits:
+      cpu: 0.5

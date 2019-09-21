@@ -1,0 +1,51 @@
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: {{.Chart.Name}}-{{.Values.resname.be}}
+  namespace: {{.Values.namespace}}
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+      tier: backend
+  replicas: 2
+  minReadySeconds: 5
+  progressDeadlineSeconds: 300
+  revisionHistoryLimit: 5
+  strategy:
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 50%
+  template: 
+    metadata:
+      labels:
+        app: myapp
+        tier: backend
+    spec:
+      containers:
+      - name: myappbe
+        image: BUILDTAG
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: {{ .Values.resources.frontend.limits.cpu | quote }}
+            memory: "500Mi"
+          requests:
+            cpu: "0.2"
+            memory: "200Mi"
+        env:
+          - name: "MY_DB_USER"
+            value: "mysqluser"
+          - name: "MY_DB_PASS"
+            value: "password"
+          - name: "MY_DB_NAME"
+            value: "mydatadb"
+          - name: "MY_DB_HOST_WRITE"
+            value: "mysql-0.mysql"
+          - name: "MY_DB_HOST_READ"
+            value: "mysql-read"
+
+

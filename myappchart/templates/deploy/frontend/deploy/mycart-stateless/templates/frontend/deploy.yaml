@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: myacart-frontend
+  namespace: mycart
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+      tier: frontend
+  replicas: 2
+  minReadySeconds: 5
+  progressDeadlineSeconds: 300
+  revisionHistoryLimit: 5
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template: 
+    metadata:
+      labels:
+        app: myapp
+        tier: frontend
+    spec:
+      containers:
+      - name: myappfe
+        image: mohanraz81/mycart-frontend:2.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: "0.5"
+            memory: "500Mi"
+          requests:
+            cpu: "0.2"
+            memory: "200Mi"
+        env:
+          - name: BACKENDLB
+            value: backendapi
+
+
+

@@ -1,0 +1,15 @@
+apiVersion: "v1"
+name: mychart-stateless
+version: 1.1.1
+description: mycart frontend andd backend
+keywords:
+  - A list of keywords about this project (optional)
+home: The URL of this project's home page (optional)
+sources:
+  - https://github.com/mohanraz81/myapp1808.git
+maintainers: 
+  - name: Mohanraj
+    email: mohanraz@gmail.com
+    url: https://github.com/mohanraz81
+engine: gotpl
+appVersion: 1.1.1
