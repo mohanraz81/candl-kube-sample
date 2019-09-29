@@ -10,7 +10,11 @@ spec:
       - name: pi
         image: mysql:5.7
         command: 
-          - mysql -h mysql-0.mysql <<EOF
+          - bash
+          - "-c"
+          - |
+            set -ex
+            mysql -h mysql-0.mysql <<EOF
             CREATE DATABASE mydatadb;
             CREATE USER 'mysqluser'@'%' IDENTIFIED BY 'password';
             GRANT ALL PRIVILEGES ON *.* TO 'mysqluser'@'%';
