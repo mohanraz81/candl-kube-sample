@@ -1,0 +1,16 @@
+microservice: myapp
+namespace: mycart
+dockerid: mohanraz81
+buildtag: 1.0
+db: 
+  servicename: mysql
+  label: database
+  service: api
+  replica: 3
+  port: 3306
+  limits:
+    cpu: 0.3
+    memory: 300m
+  storage: 10G
+  readlb: mysql-read
+  writelb: mysql

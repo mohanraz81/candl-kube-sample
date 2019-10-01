@@ -1,0 +1,21 @@
+microservice: myapp
+namespace: mycart
+dockerid: mohanraz81
+buildtag: 1.0
+fe: 
+  deploy:
+    conndrain: 5
+    deploypercent: 25%
+    timeout: 300
+    versions: 5
+  label: frontend
+  service: api
+  listenerport: 80
+  servicetype: LoadBalancer
+  minreplica: 2
+  maxreplica: 10
+  cpulimit: 70
+  port: 80
+  limits:
+    cpu: 0.5
+    memory: 300Mi

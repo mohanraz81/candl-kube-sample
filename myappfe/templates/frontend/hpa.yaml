@@ -1,0 +1,18 @@
+---
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{.Values.microservice}}-{{.Values.fe.label}}-hpa
+  namespace: {{.Values.namespace}}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{.Values.microservice}}-{{.Values.fe.label}}
+  minReplicas: {{.Values.fe.minreplica}}
+  maxReplicas: {{.Values.fe.maxreplica}}
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      targetAverageUtilization: {{.Values.fe.cpulimit}}

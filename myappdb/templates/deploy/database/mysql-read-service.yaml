@@ -1,0 +1,18 @@
+---
+# Client service for connecting to any MySQL instance for reads.
+# For writes, you must instead connect to the master: mysql-0.mysql.
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{.Values.db.readlb}}
+  namespace: {{.Values.namespace}}
+  labels:
+    app: {{.Values.microservice}}
+    tier: {{.Values.db.label}}
+spec:
+  ports:
+  - name: mysql
+    port: {{.Values.db.port}}
+  selector:
+    app: {{.Values.microservice}}
+    tier: {{.Values.db.label}}

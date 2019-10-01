@@ -2,13 +2,13 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: myacart-frontend
-  namespace: mycart
+  name: {{.Values.msname}}-{{.Values.felabel}}
+  namespace: {{.Values.namespace}}
 spec:
   selector:
     matchLabels:
-      app: myapp
-      tier: frontend
+      app: {{.Values.msname}}
+      tier: {{.Values.felabel}}
   replicas: 2
   minReadySeconds: 5
   progressDeadlineSeconds: 300
@@ -20,8 +20,8 @@ spec:
   template: 
     metadata:
       labels:
-        app: myapp
-        tier: frontend
+        app: {{.Values.msname}}
+        tier: {{.Values.felabel}}
     spec:
       containers:
       - name: myappfe
@@ -31,8 +31,8 @@ spec:
         - containerPort: 80
         resources:
           limits:
-            cpu: "0.3"
-            memory: "300Mi"
+            cpu: {{.Values.limits.cpu | quote}}
+            memory: {{.Values.limits.memory | quote}}
           requests:
             cpu: "0.2"
             memory: "200Mi"

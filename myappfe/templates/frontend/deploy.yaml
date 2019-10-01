@@ -1,0 +1,52 @@
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: {{.Values.microservice}}-{{.Values.fe.label}}
+  namespace: {{.Values.namespace}}
+spec:
+  selector:
+    matchLabels:
+      app: {{.Values.microservice}}
+      tier: {{.Values.fe.label}}
+  replicas: {{.Values.fe.minreplica}}
+  minReadySeconds: {{.Values.fe.deploy.conndrain}}
+  progressDeadlineSeconds: {{.Values.fe.deploy.timeput}}
+  revisionHistoryLimit: {{.Values.fe.deploy.version}}
+  strategy:
+    rollingUpdate:
+      maxSurge: {{.Values.fe.deploy.deploypercent}}
+      maxUnavailable: {{.Values.fe.deploy.deploypercent}}
+  template: 
+    metadata:
+      labels:
+        app: {{.Values.microservice}}
+        tier: {{.Values.fe.label}}
+    spec:
+      containers:
+      - name: {{.Values.microservice}}-{{.Values.fe.label}}
+        image: {{.Values.dockerid}}/{{.Values.microservice}}-{{.Values.fe.label}}:{{.Values.buildtag}}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: {{.Values.fe.port}}
+        resources:
+          limits:
+            cpu: {{.Values.fe.limits.cpu | quote}}
+            memory: {{.Values.fe.limits.memory | quote}}
+          requests:
+            cpu: {{.Values.fe.limits.cpu | quote}}
+            memory: {{.Values.fe.limits.memory | quote}}
+        env:
+          - name: "MY_DB_USER"
+            value: "mysqluser"
+          - name: "MY_DB_PASS"
+            value: "password"
+          - name: "MY_DB_NAME"
+            value: "mydatadb"
+          - name: "MY_DB_HOST_WRITE"
+            value: "mysql-database-0.mysql"
+          - name: "MY_DB_HOST_READ"
+            value: "mysql-read"
+
+
+

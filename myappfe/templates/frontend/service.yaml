@@ -1,0 +1,15 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{.Values.fe.service}}
+  namespace: {{.Values.namespace}}
+spec:
+  selector:
+    app: {{.Values.microservice}}
+    tier: {{.Values.fe.label}}
+  ports:
+  - protocol: "TCP"
+    port: {{.Values.fe.listenerport}}
+    targetPort: {{.Values.fe.port}}
+  type: {{.Values.fe.servicetype}}

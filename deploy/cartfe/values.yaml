@@ -1,0 +1,7 @@
+namespace: mycart
+msname: cart
+felabel: frontend
+servicename: api
+limits:
+  cpu: 0.3
+  memory: 300Mi

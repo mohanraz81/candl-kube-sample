@@ -2,8 +2,8 @@
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: myapp-frontend-hpa
-  namespace: mycart
+  name: {{.Values.msname}}-{{.Values.felabel}}-hpa
+  namespace: {{.Values.namespace}}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
