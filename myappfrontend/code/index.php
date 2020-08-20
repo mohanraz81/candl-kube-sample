@@ -9,11 +9,11 @@ function insertlabassoc($dbo,$sql)
         $stmt = $dbo->prepare($sql);
         $stmt->execute();
 }
-$labdbhost_name =  getenv("MY_DB_HOST_WRITE");
-$labdbhost_read_name =  getenv("MY_DB_HOST_READ");
-$labdatabase =  getenv("MY_DB_NAME");
-$labusername = getenv("MY_DB_USER");
-$labpassword = getenv("MY_DB_PASS");
+$labdbhost_name =  "MY_DB_HOST_WRITE";
+$labdbhost_read_name =  "MY_DB_HOST_READ";
+$labdatabase =  "MY_DB_NAME";
+$labusername = "MY_DB_USER";
+$labpassword = "MY_DB_PASS";
 try
 {
         $dbo = new PDO('mysql:host='.$labdbhost_name.';dbname='.$labdatabase, $labusername, $labpassword);
